@@ -1,28 +1,24 @@
-// src/context/ThemeContext.tsx
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {
   createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
-import { Appearance, ColorSchemeName } from "react-native";
-import {
-  Provider as PaperProvider,
-  MD3Theme as PaperTheme,
-} from "react-native-paper";
-import { darkTheme, lightTheme } from "../theme/theme";
+import { Provider as PaperProvider } from "react-native-paper";
+import { AppTheme, darkTheme, lightTheme } from "../theme/theme";
 
 type ThemeContextType = {
   isDark: boolean;
   toggleTheme: () => void;
-  theme: PaperTheme;
+  theme: AppTheme;
 };
 
 const THEME_KEY = "app:theme:v1";
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -33,11 +29,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     (async () => {
       const saved = await AsyncStorage.getItem(THEME_KEY);
+
       if (saved) {
         setIsDark(JSON.parse(saved));
       } else {
-        const sys: ColorSchemeName = Appearance.getColorScheme();
-        setIsDark(sys === "dark");
+        setIsDark(false);
       }
       setLoading(false);
     })();
@@ -62,11 +58,4 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
       <PaperProvider theme={theme}>{children}</PaperProvider>
     </ThemeContext.Provider>
   );
-};
-
-export const useThemeContext = () => {
-  const ctx = useContext(ThemeContext);
-  if (!ctx)
-    throw new Error("useThemeContext must be used within ThemeProvider");
-  return ctx;
 };

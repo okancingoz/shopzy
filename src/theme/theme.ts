@@ -2,6 +2,7 @@ import { Platform } from "react-native";
 import {
   MD3DarkTheme as DefaultDarkTheme,
   MD3LightTheme as DefaultLightTheme,
+  MD3Theme,
   configureFonts,
 } from "react-native-paper";
 import { MD3Type } from "react-native-paper/lib/typescript/types";
@@ -176,7 +177,20 @@ const fontConfig: Record<string, MD3Type> = {
 
 const fonts = configureFonts({ config: fontConfig, isV3: true });
 
-export const lightTheme = {
+export type AppTheme = MD3Theme & {
+  colors: MD3Theme["colors"] & {
+    text: string;
+    textSecondary: string;
+    border: string;
+    grayLight: string;
+    grayMedium: string;
+    grayDark: string;
+    warning: string;
+    success: string;
+  };
+};
+
+export const lightTheme: AppTheme = {
   ...DefaultLightTheme,
   colors: {
     ...DefaultLightTheme.colors,
@@ -197,7 +211,7 @@ export const lightTheme = {
   fonts,
 };
 
-export const darkTheme = {
+export const darkTheme: AppTheme = {
   ...DefaultDarkTheme,
   colors: {
     ...DefaultDarkTheme.colors,

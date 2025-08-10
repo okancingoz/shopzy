@@ -1,26 +1,19 @@
 import React from "react";
-import { Provider as PaperProvider, Surface, Text } from "react-native-paper";
 import "./global.css";
+import { ThemeProvider } from "./src/context/ThemeContext";
 import { useLoadFonts } from "./src/hooks/useLoadFonts";
-import { lightTheme } from "./src/theme/theme";
+import MainNavigator from "./src/navigation/MainNavigator";
 
 export default function App() {
   const fontsLoaded = useLoadFonts();
 
   if (!fontsLoaded) {
-    return <Text>Loading Fonts...</Text>;
+    return null;
   }
 
   return (
-    <PaperProvider theme={lightTheme}>
-      <Surface className="flex-1 items-center justify-center bg-white">
-        <Text
-          variant="labelLarge"
-          style={{ color: lightTheme.colors.grayDark }}
-        >
-          This text uses Poppins font.
-        </Text>
-      </Surface>
-    </PaperProvider>
+    <ThemeProvider>
+      <MainNavigator />
+    </ThemeProvider>
   );
 }
