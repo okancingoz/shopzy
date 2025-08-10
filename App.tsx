@@ -11,8 +11,6 @@ export default function App() {
     return <Text>Loading Fonts...</Text>;
   }
 
-  console.log("Theme fonts:", lightTheme.fonts);
-
   return (
     <PaperProvider theme={lightTheme}>
       <Surface className="flex-1 items-center justify-center bg-white">
