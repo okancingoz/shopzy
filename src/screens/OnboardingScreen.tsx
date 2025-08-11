@@ -35,7 +35,7 @@ export default function OnboardingScreen({ navigation }: any) {
 
   return (
     <View className="flex-1 ">
-      <View className="flex-1">
+      <View className="flex-2">
         <Image
           source={slide.image}
           style={{ height: "100%", width: "100%" }}
