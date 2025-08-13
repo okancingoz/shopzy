@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Dimensions, Image, View } from "react-native";
+import { Image, View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { useThemeContext } from "../hooks/useThemeContext";
-
-const { width, height } = Dimensions.get("window");
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useThemeContext } from "../../hooks/useThemeContext";
 
 const slides = [
   {
@@ -11,19 +10,19 @@ const slides = [
     title: "Easy Shopping",
     description:
       "Quickly find products and complete your purchase with Shopzy.",
-    image: require("../../assets/images/onboarding1.jpg"),
+    image: require("../../../assets/images/onboarding1.jpg"),
   },
   {
     id: "2",
-    title: "Wide Product Range",
+    title: "Explore Products",
     description: "Choose from thousands of products easily and effortlessly.",
-    image: require("../../assets/images/onboarding2.jpg"),
+    image: require("../../../assets/images/onboarding2.jpg"),
   },
   {
     id: "3",
     title: "Secure Payment",
     description: "Your shopping is safe with multiple secure payment options.",
-    image: require("../../assets/images/onboarding3.jpg"),
+    image: require("../../../assets/images/onboarding3.jpg"),
   },
 ];
 
@@ -34,7 +33,7 @@ export default function OnboardingScreen({ navigation }: any) {
   const slide = slides[currentIndex];
 
   return (
-    <View className="flex-1 ">
+    <SafeAreaView className="flex-1 ">
       <View className="flex-2">
         <Image
           source={slide.image}
@@ -94,6 +93,6 @@ export default function OnboardingScreen({ navigation }: any) {
           )}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
