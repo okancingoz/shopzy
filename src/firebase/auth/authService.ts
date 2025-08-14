@@ -2,6 +2,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   signInWithCredential,
   signInWithEmailAndPassword,
   signOut,
@@ -39,6 +40,10 @@ export const loginWithGoogle = async () => {
   } catch (error: any) {
     return [error, null] as [Error, null];
   }
+};
+
+export const resetPassword = (email: string) => {
+  return asyncHandler(sendPasswordResetEmail(auth, email));
 };
 
 export const logout = () => asyncHandler<void>(signOut(auth));
